@@ -60,6 +60,7 @@ namespace GettingStartedLib
             return json;
         }
 
+        [DataContract]
         public class Numbers
         {
             [DataMember]
