@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.ServiceModel;
 
 namespace GettingStartedLib
@@ -36,6 +39,33 @@ namespace GettingStartedLib
             Console.WriteLine("Received Divide({0},{1})", n1, n2);
             Console.WriteLine("Return: {0}", result);
             return result;
+        }
+
+        public string GetData(double n1, double n2)
+        {
+            Numbers numbers = new Numbers()
+            {
+                First = n1,
+                Second = n2
+            };
+            
+            string json;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Numbers));
+                ser.WriteObject(ms, numbers);
+                json = System.Text.Encoding.UTF8.GetString(ms.GetBuffer(), 0, Convert.ToInt16(ms.Length));
+            }
+
+            return json;
+        }
+
+        public class Numbers
+        {
+            [DataMember]
+            public double First { get; set; }
+            [DataMember]
+            public double Second { get; set; }
         }
     }
 }
