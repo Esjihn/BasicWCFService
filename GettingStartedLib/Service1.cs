@@ -41,6 +41,12 @@ namespace GettingStartedLib
             return result;
         }
 
+        /// <summary>
+        /// Returns JSON for testing purposes.
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public string GetData(double n1, double n2)
         {
             Numbers numbers = new Numbers()
